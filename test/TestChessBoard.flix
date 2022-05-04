@@ -67,5 +67,6 @@ namespace TestChessBoard {
         let s = ChessBoard.toString(empty(8) |> put((0, 0)));
         println(s);
         s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|q|_|_|_|_|_|_|_|")
+            |> String.replace(from = "q", to = Console.green("♛"))
 
 }

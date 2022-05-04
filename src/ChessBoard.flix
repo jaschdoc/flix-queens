@@ -32,7 +32,9 @@ namespace ChessBoard {
         Array.foreach(row -> { row[0] = "|" + row[0]; row[row.length - 1] = row[row.length - 1] + "|" }, s); // Add borders
         Array.reverse!(s);
         let header = String.repeat(r.size, " _") + " " + String.lineSeparator();
-        header + Array.map(a -> Array.join("", a), s) |> Array.join(String.lineSeparator())
+        header + Array.map(a -> Array.join("", a), s) |>
+            Array.join(String.lineSeparator()) |>
+            String.replace(from = "q", to = Console.green("♛"))
     } as & Pure
 
 }
