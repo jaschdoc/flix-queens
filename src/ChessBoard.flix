@@ -28,4 +28,9 @@ namespace ChessBoard {
         };
         Map.forall(f, r.positions)
 
+    pub def toString(b: ChessBoard): String = {
+        let sb = StringBuilder.new();
+        ???
+    } as & Pure
+
 }
