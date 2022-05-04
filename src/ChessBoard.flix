@@ -12,7 +12,7 @@ namespace ChessBoard {
     pub def put(row: Int32, col: Int32, b: ChessBoard): ChessBoard =
         let ChessBoard(r) = b;
         if (isLegalPosition(row, col, b))
-            ChessBoard({ size = r.size, positions = Map.insert(row, col, r.positions)})
+            ChessBoard({ size = r.size, positions = Map.insert(row, col, r.positions) })
         else
             b
 
