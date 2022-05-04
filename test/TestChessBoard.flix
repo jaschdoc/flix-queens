@@ -55,12 +55,16 @@ namespace TestChessBoard {
     @test
     pub def toString01(): Bool =
         let s = ChessBoard.toString(empty(4));
-        s == " _ _ _ _ \n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|"
+        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ \n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|")
 
     @test
     pub def toString02(): Bool =
         let s = ChessBoard.toString(empty(8));
-        s == " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|"
+        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|")
 
+    @test
+    pub def toString03(): Bool =
+        let s = ChessBoard.toString(empty(8) |> put((0, 0)));
+        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|q|_|_|_|_|_|_|_|")
 
 }
