@@ -63,8 +63,9 @@ namespace TestChessBoard {
         s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|")
 
     @test
-    pub def toString03(): Bool =
+    pub def toString03(): Bool & Impure =
         let s = ChessBoard.toString(empty(8) |> put((0, 0)));
+        println(s);
         s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|q|_|_|_|_|_|_|_|")
 
 }

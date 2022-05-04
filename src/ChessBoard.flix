@@ -27,30 +27,13 @@ namespace ChessBoard {
 
     pub def toString(b: ChessBoard): String = {
         let ChessBoard(r) = b;
-        def header() = {
-            let builder = StringBuilder.new();
-            StringBuilder.appendLine!(List.repeat(r.size + 1, " ") |> List.join("_"), builder);
-            StringBuilder.toString(builder)
-        };
-        let sb = StringBuilder.new();
-        let f = () -> StringBuilder.appendLine!(List.repeat(r.size + 1, "|") |> List.join("_"), sb);
-        List.range(0, r.size) |> List.foreach(_ -> f());
-        let s = StringBuilder.toString(sb) |> String.dropRight(1);
-        let l = String.split(regex = String.lineSeparator(), s) |> List.reverse;
-        let sb1 = StringBuilder.new();
-        Map.toList(r.positions) |>
-            List.sortBy(match (x, _) -> x) |>
-            List.foreach(match (row, col) -> {
-                match List.drop(row, l) {
-                    case x :: _ =>
-                        let y = String.dropLeft(2 * col, x);
-                        let ypref = String.dropRight(String.length(x) - 2 * col - 1, x);
-                        StringBuilder.appendString!(ypref + "q" + y, sb1)
-                    case Nil => bug!("Empty list")
-                }
-            });
-        let res = StringBuilder.toString(sb1) |> String.toList |> List.reverse;
-        header() + List.join("", res)
+        let strings = [["_"; r.size]; r.size];
+        //Map.foreach((k, v) -> strings[k][v] = "q", r.positions);
+        Array.foreach(row -> { row[0] = "|" + row[0]; row[r.size - 1] = row[r.size - 1] + "|" }, strings); // Add borders
+        let s = Array.map(row -> Array.intersperse("|", row), strings); // Add grid
+        Array.reverse!(s);
+        let header = String.repeat(r.size, " _") + " " + String.lineSeparator();
+        header + Array.map(a -> Array.join("", a), s) |> Array.join(String.lineSeparator())
     } as & Pure
 
 }
