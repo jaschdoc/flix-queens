@@ -8,7 +8,6 @@ namespace ChessBoard {
     pub def empty(n: Int32): ChessBoard =
         ChessBoard({size = n, positions = Map.empty()})
 
-    // refactor to optional
     pub def put(row: Int32, col: Int32, b: ChessBoard): ChessBoard =
         let ChessBoard(r) = b;
         if (isLegalPosition(row, col, b))
