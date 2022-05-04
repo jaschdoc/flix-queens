@@ -25,4 +25,13 @@ namespace ChessBoard {
         };
         Map.forall(f, r.positions)
 
+    pub def toString(b: ChessBoard): String = {
+        let ChessBoard(r) = b;
+        let sb = StringBuilder.new();
+        StringBuilder.appendLine!(List.repeat(r.size + 1, " ") |> List.join("_"), sb);
+        let f = () -> StringBuilder.appendLine!(List.repeat(r.size + 1, "|") |> List.join("_"), sb);
+        List.range(0, r.size) |> List.foreach(_ -> f());
+        StringBuilder.toString(sb) |> String.dropRight(1)
+    } as & Pure
+
 }
