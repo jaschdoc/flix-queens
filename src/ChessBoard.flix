@@ -18,15 +18,12 @@ namespace ChessBoard {
 
     def isLegalPosition(row: Int32, col: Int32, b: ChessBoard): Bool =
         let ChessBoard(r) = b;
-        //let f = (acc k, v) -> (v != col and ((row - k) != (col - v)) and ((row - k) != (col + v)) and acc);
-        let f = (k, v) -> {
-            if (v == col)
-                false // There is a queen below it
-            else if (k < row)
-                let d = row - k;
-                (v != (col + d)) and (v != (col - d)) // There is a queen in the diagonal if true
-            else 
-                true // The position is legal for this (k, v) pair
+        let f = (k, v) -> { // Obviously this is the correct implementation.
+            let d = row - k;
+            v != col and
+                k < row and
+                (v != (col + d)) and
+                (v != (col - d))
         };
         Map.forall(f, r.positions)
 
