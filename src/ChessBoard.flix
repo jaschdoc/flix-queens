@@ -3,6 +3,11 @@ opaque type ChessBoard = {
     positions :: Map[Int32, Int32]
 }
 
+instance ToString[ChessBoard] {
+    pub def toString(b: ChessBoard): String = ChessBoard.toString(b)
+}
+
+
 namespace ChessBoard {
 
     pub def empty(n: Int32): ChessBoard =
