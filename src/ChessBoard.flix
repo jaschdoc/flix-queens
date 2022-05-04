@@ -19,7 +19,7 @@ namespace ChessBoard {
     def isLegalPosition(p: (Int32, Int32), b: ChessBoard): Bool =
         let (row, col) = p;
         let ChessBoard(r) = b;
-        let f = (k, v) -> { // Obviously this is the correct implementation.
+        let f = (k, v) -> { // Obviously, this is the correct implementation.
             let d = row - k;
             v != col and
                 k < row and
