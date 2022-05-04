@@ -36,7 +36,21 @@ namespace ChessBoard {
         let f = () -> StringBuilder.appendLine!(List.repeat(r.size + 1, "|") |> List.join("_"), sb);
         List.range(0, r.size) |> List.foreach(_ -> f());
         let s = StringBuilder.toString(sb) |> String.dropRight(1);
-        String.concat(header(), s)
+        let l = String.split(regex = String.lineSeparator(), s) |> List.reverse;
+        let sb1 = StringBuilder.new();
+        Map.toList(r.positions) |>
+            List.sortBy(match (x, _) -> x) |>
+            List.foreach(match (row, col) -> {
+                match List.drop(row, l) {
+                    case x :: _ =>
+                        let y = String.dropLeft(2 * col, x);
+                        let ypref = String.dropRight(String.length(x) - 2 * col - 1, x);
+                        StringBuilder.appendString!(ypref + "q" + y, sb1)
+                    case Nil => bug!("Empty list")
+                }
+            });
+        let res = StringBuilder.toString(sb1) |> String.toList |> List.reverse;
+        header() + List.join("", res)
     } as & Pure
 
 }
