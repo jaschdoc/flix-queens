@@ -11,11 +11,10 @@ namespace ChessBoard {
     // refactor to optional
     pub def put(row: Int32, col: Int32, b: ChessBoard): ChessBoard =
         let ChessBoard(r) = b;
-        if (isLegalPosition(row, col, b)) {
+        if (isLegalPosition(row, col, b))
             ChessBoard({ size = r.size, positions = Map.insert(row, col, r.positions)})
-        } else {
+        else
             b
-        }
 
     def isLegalPosition(row: Int32, col: Int32, b: ChessBoard): Bool =
         let ChessBoard(r) = b;
