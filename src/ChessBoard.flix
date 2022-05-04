@@ -27,10 +27,9 @@ namespace ChessBoard {
 
     pub def toString(b: ChessBoard): String = {
         let ChessBoard(r) = b;
-        let strings = [["_"; r.size]; r.size];
-        //Map.foreach((k, v) -> strings[k][v] = "q", r.positions);
-        Array.foreach(row -> { row[0] = "|" + row[0]; row[r.size - 1] = row[r.size - 1] + "|" }, strings); // Add borders
-        let s = Array.map(row -> Array.intersperse("|", row), strings); // Add grid
+        let s = Array.map(row -> Array.intersperse("|", row), [["_"; r.size]; r.size]); // Add grid
+        Map.foreach((k, v) -> s[k][v] = "q", r.positions);
+        Array.foreach(row -> { row[0] = "|" + row[0]; row[row.length - 1] = row[row.length - 1] + "|" }, s); // Add borders
         Array.reverse!(s);
         let header = String.repeat(r.size, " _") + " " + String.lineSeparator();
         header + Array.map(a -> Array.join("", a), s) |> Array.join(String.lineSeparator())
