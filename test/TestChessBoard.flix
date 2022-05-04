@@ -41,6 +41,14 @@ namespace TestChessBoard {
 
     @test
     pub def toString01(): Bool =
-        ChessBoard.toString(empty(4)) == " _ _ _ _ \n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n"
+        let s = ChessBoard.toString(empty(4));
+        println(s);
+        s == " _ _ _ _ \n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|"
+
+    @test
+    pub def toString02(): Bool =
+        let s = ChessBoard.toString(empty(8));
+        s == " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|"
+
 
 }
