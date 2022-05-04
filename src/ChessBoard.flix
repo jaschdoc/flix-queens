@@ -8,14 +8,16 @@ namespace ChessBoard {
     pub def empty(n: Int32): ChessBoard =
         ChessBoard({size = n, positions = Map.empty()})
 
-    pub def put(row: Int32, col: Int32, b: ChessBoard): ChessBoard =
+    pub def put(p: (Int32, Int32), b: ChessBoard): ChessBoard =
+        let (row, col) = p;
         let ChessBoard(r) = b;
-        if (isLegalPosition(row, col, b))
+        if (isLegalPosition(p, b))
             ChessBoard({ size = r.size, positions = Map.insert(row, col, r.positions) })
         else
             b
 
-    def isLegalPosition(row: Int32, col: Int32, b: ChessBoard): Bool =
+    def isLegalPosition(p: (Int32, Int32), b: ChessBoard): Bool =
+        let (row, col) = p;
         let ChessBoard(r) = b;
         let f = (k, v) -> { // Obviously this is the correct implementation.
             let d = row - k;
