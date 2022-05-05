@@ -48,25 +48,4 @@ namespace TestChessBoard {
                             put((7, 3));
         r.positions == Map#{0 => 5, 1 => 0, 2 => 4, 3 => 1, 4 => 7, 5 => 2, 6 => 6, 7 => 3}
 
-    /////////////////////////////////////////////////////////////////////////////
-    // toString                                                                //
-    /////////////////////////////////////////////////////////////////////////////
-
-    @test
-    pub def toString01(): Bool =
-        let s = ChessBoard.toString(empty(4));
-        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ \n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|\n|_|_|_|_|")
-
-    @test
-    pub def toString02(): Bool =
-        let s = ChessBoard.toString(empty(8));
-        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|")
-
-    @test
-    pub def toString03(): Bool & Impure =
-        let s = ChessBoard.toString(empty(8) |> put((0, 0)));
-        println(s);
-        s == String.replace(from = "\n", to = String.lineSeparator(), " _ _ _ _ _ _ _ _ \n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|_|_|_|_|_|_|_|_|\n|q|_|_|_|_|_|_|_|")
-            |> String.replace(from = "q", to = Console.green("♛"))
-
 }
