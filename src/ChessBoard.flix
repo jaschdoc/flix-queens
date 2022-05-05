@@ -34,12 +34,12 @@ namespace ChessBoard {
 
     pub def toString(b: ChessBoard): String = {
         let ChessBoard(r) = b;
-        let s = [[]; r.size] |> Array.map(_ -> mkRow("  ", r.size));
-        colorCheckerboard(s);
-        placeQueens(r.positions, s);
-        addCoordinates(s);
-        Array.reverse!(s);
-        render(s)
+        let a = [[]; r.size] |> Array.map(_ -> mkRow("  ", r.size));
+        colorCheckerboard(a);
+        placeQueens(r.positions, a);
+        addCoordinates(a);
+        Array.reverse!(a);
+        render(a)
     } as & Pure
 
     def mkRow(s: String, n: Int32): Array[String] & Impure =
