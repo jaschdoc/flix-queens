@@ -3,6 +3,11 @@ opaque type ChessBoard = {
     positions :: Map[Int32, Int32]
 }
 
+instance ToString[ChessBoard] {
+    pub def toString(b: ChessBoard): String = ChessBoard.toString(b)
+}
+
+
 namespace ChessBoard {
 
     pub def empty(n: Int32): ChessBoard =
@@ -27,12 +32,38 @@ namespace ChessBoard {
 
     pub def toString(b: ChessBoard): String = {
         let ChessBoard(r) = b;
-        let sb = StringBuilder.new();
-        StringBuilder.appendLine!(List.repeat(r.size + 1, " ") |> List.join("_"), sb);
-        let f = () -> StringBuilder.appendLine!(List.repeat(r.size + 1, "|") |> List.join("_"), sb);
-        List.range(0, r.size) |> List.foreach(_ -> f());
-        StringBuilder.toString(sb) |> String.dropRight(1)
+        let a = [[]; r.size] |> Array.map(_ -> mkRow("  ", r.size));
+        colorCheckerboard(a);
+        placeQueens(r.positions, a);
+        addCoordinates(a);
+        Array.reverse!(a);
+        render(a)
     } as & Pure
+
+    def mkRow(s: String, n: Int32): Array[String] & Impure =
+        [s; n]
+
+    def colorCheckerboard(a: Array[Array[String]]): Unit & Impure =
+        Array.foreachWithIndex((row, i) ->
+            Array.foreachWithIndex((col, j) ->
+                if (((i + j) &&& 1) == 0)
+                    row[j] = Console.bgBlack(col)
+                else
+                    row[j] = Console.bgWhite(col),
+            row),
+        a)
+    
+    def placeQueens(m: Map[Int32, Int32], a: Array[Array[String]]): Unit & Impure =
+        Map.foreach((k, v) -> a[k][v] = Console.black("♛ ") |> Console.bgYellow, m)
+
+    def addCoordinates(a: Array[Array[String]]): Unit & Impure =
+        Array.foreachWithIndex((row, i) -> row[0] = "${i} ${row[0]}", a)
+
+    def render(a: Array[Array[String]]): String & Impure =
+        let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |>
+            Array.join(" ") + String.lineSeparator();
+        Array.map(b -> Array.join("", b), a) |>
+            Array.join(String.lineSeparator()) + footer
 
     pub def toString2(b: ChessBoard): String =
         let ChessBoard(r) = b;
