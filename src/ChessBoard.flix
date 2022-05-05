@@ -54,7 +54,7 @@ namespace ChessBoard {
         a)
     
     def placeQueens(m: Map[Int32, Int32], a: Array[Array[String]]): Unit & Impure =
-        Map.foreach((k, v) -> a[k][v] = Console.black("♛ ") |> Console.bgYellow, m)
+        Map.foreach((k, v) -> a[k][v] = Console.black("\u265b ") |> Console.bgYellow, m)
 
     def addCoordinates(a: Array[Array[String]]): Unit & Impure =
         Array.foreachWithIndex((row, i) -> row[0] = "${i} ${row[0]}", a)
