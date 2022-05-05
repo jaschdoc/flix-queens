@@ -36,7 +36,6 @@ namespace ChessBoard {
         colorCheckerboard(a);
         placeQueens(r.positions, a);
         addCoordinates(a);
-        Array.reverse!(a);
         render(a)
     } as & Pure
 
@@ -60,6 +59,7 @@ namespace ChessBoard {
         Array.foreachWithIndex((row, i) -> row[0] = "${i} ${row[0]}", a)
 
     def render(a: Array[Array[String]]): String & Impure =
+        Array.reverse!(a);
         let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |>
             Array.join(" ") + String.lineSeparator();
         Array.map(b -> Array.join("", b), a) |>
