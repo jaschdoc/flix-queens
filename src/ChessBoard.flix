@@ -34,4 +34,15 @@ namespace ChessBoard {
         StringBuilder.toString(sb) |> String.dropRight(1)
     } as & Pure
 
+    pub def toString2(b: ChessBoard): String =
+        let ChessBoard(r) = b;
+        let pos = r.positions;
+        let size = r.size;
+        let top = " " + String.repeat(size, "_ ");
+        
+        let f = (acc, _, v) -> {
+            acc + String.repeat(v, "|_") + "|Q|" + String.repeat(size - v - 1, "_|") + "\n"
+        };
+        Map.foldLeftWithKey(f, top + "\n", pos)
+
 }

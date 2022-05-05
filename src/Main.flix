@@ -1,5 +1,5 @@
 // The main entry point.
 def main(): Unit & Impure =
-    println(List.length(Queens.allLegalBoards(8)));
-    println(Queens.numberOfLegalBoards(8));
-    println("Hello World!")
+    println(String.repeat(3, "Hello World!"));
+
+    Queens.printSolutions(Queens.allLegalBoards2(5))
