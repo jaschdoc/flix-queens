@@ -44,7 +44,7 @@ namespace Queens {
 
     pub def printSolutions(boards: List[ChessBoard]): Unit & Impure =
         def loop(ks) = match ks {
-            case x :: xs => println(ChessBoard.toString2(x)); loop(xs)
+            case x :: xs => println(ChessBoard.toString(x)); loop(xs)
             case Nil     => println("")
         };
         loop(boards)
