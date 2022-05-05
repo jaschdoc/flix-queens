@@ -27,7 +27,7 @@ namespace Queens {
             } else
                 loop(i, j + 1, b)
         };
-        loop(0, 0, ChessBoard.empty(size)) ::: Nil
+        loop(0, 0, ChessBoard.empty(size))
 
     pub def numberOfLegalBoards(size: Int32): Int32 & Impure =
         def loop(i, j, b) = {  
