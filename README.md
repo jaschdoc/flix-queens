@@ -1,4 +1,3 @@
 # queens
 
-Enter some useful information.
-
+Queens problem implemented in Flix with a nice renderer.
