@@ -34,7 +34,18 @@ namespace ChessBoard {
 
     pub def toString(b: ChessBoard): String = {
         let ChessBoard(r) = b;
-        let s = [[" "; r.size]; r.size]; // Array.map(row -> Array.intersperse("|", row), [[" "; r.size]; r.size]); // Add grid
+        let s = [[]; r.size] |> Array.map(_ -> mkRow("  ", r.size));
+        colorCheckerboard(s);
+        placeQueens(r.positions, s);
+        addCoordinates(s);
+        Array.reverse!(s);
+        render(s)
+    } as & Pure
+
+    def mkRow(s: String, n: Int32): Array[String] & Impure =
+        [s; n]
+
+    def colorCheckerboard(a: Array[Array[String]]): Unit & Impure =
         Array.foreachWithIndex((row, i) ->
             Array.foreachWithIndex((col, j) ->
                 if (((i + j) &&& 1) == 0)
@@ -42,16 +53,17 @@ namespace ChessBoard {
                 else
                     row[j] = Console.bgWhite(col),
             row),
-        s); //
-        // Map.foreach((k, v) -> s[k][v] = "q", r.positions);
-        // Array.foreachWithIndex((row, i) -> { row[0] = "${i} " + row[0]; row[row.length - 1] = row[row.length - 1] + "|" }, s); // Add borders
-        //Array.reverse!(s);
-        let header = ""; //String.repeat(r.size, " _") + " " + String.lineSeparator();
-        let footer = ""; //String.lineSeparator() + "  " + Array.range(0, r.size, static) |> Array.join(" ");
-        header + Array.map(a -> Array.join("|", a), s) |>
-            Array.join(String.lineSeparator()) |>
-            String.replace(from = "q", to = Console.green("♛")) +
-            footer
-    } as & Pure
+        a)
+    
+    def placeQueens(m: Map[Int32, Int32], a: Array[Array[String]]): Unit & Impure =
+        Map.foreach((k, v) -> a[k][v] = Console.black("♛ ") |> Console.bgYellow, m)
+
+    def addCoordinates(a: Array[Array[String]]): Unit & Impure =
+        Array.foreachWithIndex((row, i) -> row[0] = "${i} ${row[0]}", a)
+
+    def render(a: Array[Array[String]]): String & Impure =
+        let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |> Array.join(" ");
+        Array.map(b -> Array.join("", b), a) |>
+            Array.join(String.lineSeparator()) + footer
 
 }
