@@ -60,7 +60,8 @@ namespace ChessBoard {
         Array.foreachWithIndex((row, i) -> row[0] = "${i} ${row[0]}", a)
 
     def render(a: Array[Array[String]]): String & Impure =
-        let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |> Array.join(" ");
+        let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |>
+            Array.join(" ") + String.lineSeparator();
         Array.map(b -> Array.join("", b), a) |>
             Array.join(String.lineSeparator()) + footer
 
