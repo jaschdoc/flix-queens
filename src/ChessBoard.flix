@@ -4,9 +4,7 @@ opaque type ChessBoard = {
 }
 
 instance ToString[ChessBoard] {
-
     pub def toString(b: ChessBoard): String = ChessBoard.toString(b)
-
 }
 
 
@@ -65,5 +63,16 @@ namespace ChessBoard {
         let footer = String.lineSeparator() + "  " + Array.range(0, a.length, static) |> Array.join(" ");
         Array.map(b -> Array.join("", b), a) |>
             Array.join(String.lineSeparator()) + footer
+
+    pub def toString2(b: ChessBoard): String =
+        let ChessBoard(r) = b;
+        let pos = r.positions;
+        let size = r.size;
+        let top = " " + String.repeat(size, "_ ");
+        
+        let f = (acc, _, v) -> {
+            acc + String.repeat(v, "|_") + "|Q|" + String.repeat(size - v - 1, "_|") + "\n"
+        };
+        Map.foldLeftWithKey(f, top + "\n", pos)
 
 }

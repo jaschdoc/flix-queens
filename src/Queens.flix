@@ -16,6 +16,19 @@ namespace Queens {
         loop(0, 0, ChessBoard.empty(size));
         MutList.toList(res)
 
+    pub def allLegalBoards2(size: Int32): List[ChessBoard] =
+        def loop(i, j, b) = {
+            if (i >= size)
+                b :: Nil 
+            else if (j >= size)
+                Nil
+            else if (ChessBoard.isLegalPosition((i, j), b)) {
+                loop(i + 1, 0, ChessBoard.put((i, j), b)) ::: loop(i, j + 1, b)
+            } else
+                loop(i, j + 1, b)
+        };
+        loop(0, 0, ChessBoard.empty(size)) ::: Nil
+
     pub def numberOfLegalBoards(size: Int32): Int32 & Impure =
         def loop(i, j, b) = {  
             if (i >= size)
@@ -28,5 +41,12 @@ namespace Queens {
                 loop(i, j + 1, b)
         };
         loop(0, 0, ChessBoard.empty(size))
+
+    pub def printSolutions(boards: List[ChessBoard]): Unit & Impure =
+        def loop(ks) = match ks {
+            case x :: xs => println(ChessBoard.toString2(x)); loop(xs)
+            case Nil     => println("")
+        };
+        loop(boards)
 
 }
