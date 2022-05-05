@@ -2,19 +2,18 @@ namespace Queens {
 
     pub def allLegalBoards(size: Int32): List[ChessBoard] & Impure =
         let res = new MutList(static);
-        def loop(i, j, b, k) = {  
-            if (i >= size)  {
-                MutList.push!(b, res);
-                k()
-            }
+        def loop(i, j, b) = {  
+            if (i >= size)
+                MutList.push!(b, res)
             else if (j >= size)
-                k()
-            else if (ChessBoard.isLegalPosition((i, j), b))
-                loop(i + 1, 0, ChessBoard.put((i, j), b), () -> loop(i, j + 1, b, k))
-            else
-                loop(i, j + 1, b, k)
+                ()
+            else if (ChessBoard.isLegalPosition((i, j), b)) {
+                loop(i + 1, 0, ChessBoard.put((i, j), b));
+                loop(i, j + 1, b)
+            } else
+                loop(i, j + 1, b)
         };
-        loop(0, 0, ChessBoard.empty(size), ks -> ks as & Impure);
+        loop(0, 0, ChessBoard.empty(size));
         MutList.toList(res)
 
     pub def allLegalBoards2(size: Int32): List[ChessBoard] =
@@ -28,7 +27,7 @@ namespace Queens {
             } else
                 loop(i, j + 1, b)
         };
-        loop(0, 0, ChessBoard.empty(size))
+        loop(0, 0, ChessBoard.empty(size)) ::: Nil
 
     pub def numberOfLegalBoards(size: Int32): Int32 & Impure =
         def loop(i, j, b) = {  
