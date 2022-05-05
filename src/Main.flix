@@ -1,9 +1,8 @@
-// The main entry point.
 def main(): Unit & Impure =
     match Environment.getArgs() {
         case x :: _ => match Int32.fromString(x) {
             case Ok(n) =>
-                Queens.allLegalBoards(n) |> 
+                Queens.parAllLegalBoards(n) |> 
                 List.join(String.lineSeparator()) |>
                 println
             case Err(_) => System/StdErr.println("\"${x}\" is not a valid number.")
